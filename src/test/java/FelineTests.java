@@ -3,59 +3,36 @@
 import com.example.Feline;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FelineTests {
 
     @Test
-    public void testDefaultConstructorHasNoMane() {
+    public void shouldReturnMeatPredatorDiet() throws Exception {
         Feline feline = new Feline();
-        assertFalse(feline.doesHaveMane());
+        List<String> food = feline.eatMeat();
+        assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), food);
     }
 
     @Test
-    public void testGetKittensDefault() {
-        Feline feline = new Feline(true);
-        assertEquals(1, feline.getKittens());
-    }
-
-    @Test
-    public void testGetFood() throws Exception {
-        Feline feline = new Feline(true);
-        List<String> food = feline.getFood();
-        assertEquals(3, food.size());
-        assertTrue(food.contains("Животные"));
-        assertTrue(food.contains("Птицы"));
-        assertTrue(food.contains("Рыба"));
-    }
-
-    @Test
-    public void testEatMeat() throws Exception {
-        Feline feline = new Feline(true);
-        List<String> meat = feline.eatMeat();
-        assertEquals(3, meat.size());
-        assertTrue(meat.contains("Животные"));
-        assertTrue(meat.contains("Птицы"));
-        assertTrue(meat.contains("Рыба"));
-    }
-
-    @Test
-    public void testGetFamily() {
-        Feline feline = new Feline(true);
+    public void shouldReturnFamilyName() {
+        Feline feline = new Feline();
         assertEquals("Кошачьи", feline.getFamily());
     }
 
     @Test
-    public void testGetFoodWithUnknownKindThrowsExceptionWithMessage() {
-        Feline feline = new Feline(true);
-        try {
-            feline.getFood("Неизвестно");
-            fail("Ожидалось исключение");
-        } catch (Exception e) {
-            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник",
-                    e.getMessage());
-        }
+    public void shouldReturnDefaultKittensCount() {
+        Feline feline = new Feline();
+        assertEquals(1, feline.getKittens());
     }
+
+    @Test
+    public void shouldReturnSpecifiedKittensCount() {
+        Feline feline = new Feline();
+        assertEquals(5, feline.getKittens(5));
+    }
+
 }

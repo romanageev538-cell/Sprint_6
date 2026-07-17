@@ -2,48 +2,25 @@
 
 import java.util.List;
 
-public class Feline extends Animal implements Predator, FelineCharacteristics {
+<span class="fc" id="L5">public class Feline extends Animal implements Predator {</span>
 
-            private final boolean hasMane;  // поле, определяющее наличие гривы
-
-        // Конструктор с параметром – основной
-<span class="fc" id="L10">        public Feline(boolean hasMane) {</span>
-<span class="fc" id="L11">            this.hasMane = hasMane;</span>
-<span class="fc" id="L12">        }</span>
-
-        // Конструктор по умолчанию – для удобства (гривы нет)
-        public Feline() {
-<span class="fc" id="L16">            this(false);</span>
-<span class="fc" id="L17">        }</span>
-
-        @Override
-        public List&lt;String&gt; eatMeat() throws Exception {
-<span class="fc" id="L21">            return getFood(&quot;Хищник&quot;);</span>
-        }
-
-        @Override
-        public String getFamily() {
-<span class="fc" id="L26">            return &quot;Кошачьи&quot;;</span>
-        }
-
-        // Теперь возвращаем значение, переданное в конструктор
-        @Override
-        public boolean doesHaveMane() {
-<span class="fc" id="L32">            return hasMane;</span>
-        }
-
-        @Override
-        public int getKittens() {
-<span class="fc" id="L37">            return getKittens(1);</span>
-        }
-
-        public int getKittens(int kittensCount) {
-<span class="fc" id="L41">            return kittensCount;</span>
-        }
-
-        @Override
-        public List&lt;String&gt; getFood() throws Exception {
-<span class="fc" id="L46">            return getFood(&quot;Хищник&quot;);</span>
-        }
+    @Override
+    public List&lt;String&gt; eatMeat() throws Exception {
+<span class="fc" id="L9">        return getFood(&quot;Хищник&quot;);</span>
     }
+
+    @Override
+    public String getFamily() {
+<span class="fc" id="L14">        return &quot;Кошачьи&quot;;</span>
+    }
+
+    public int getKittens() {
+<span class="fc" id="L18">        return getKittens(1);</span>
+    }
+
+    public int getKittens(int kittensCount) {
+<span class="fc" id="L22">        return kittensCount;</span>
+    }
+
+}
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

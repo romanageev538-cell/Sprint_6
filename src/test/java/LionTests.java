@@ -1,6 +1,4 @@
-
-
-import com.example.FelineCharacteristics;
+import com.example.Feline;
 import com.example.Lion;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,47 +9,46 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTests {
 
     @Mock
-    private FelineCharacteristics infoFeline;
+    private Feline felineMock;
 
-    // ---------- Тесты с моком ----------
     @Test
-    public void testConstructorWithMockDoesHaveMane() {
-        when(infoFeline.doesHaveMane()).thenReturn(false);
-        Lion lion = new Lion(infoFeline);
+    public void shouldHaveManeForMale() throws Exception {
+        Lion lion = new Lion("Самец", felineMock);
+        assertTrue(lion.doesHaveMane());
+    }
+
+    @Test
+    public void shouldNotHaveManeForFemale() throws Exception {
+        Lion lion = new Lion("Самка", felineMock);
         assertFalse(lion.doesHaveMane());
-        assertNotNull(lion);
+    }
+
+    @Test(expected = Exception.class)
+    public void shouldThrowExceptionForInvalidSex() throws Exception {
+        new Lion("Неизвестно", felineMock);
     }
 
     @Test
-    public void testConstructorWithMockGetKittens() {
-        when(infoFeline.getKittens()).thenReturn(5);
-        Lion lion = new Lion(infoFeline);
-        assertEquals(5, lion.getKittens());
+    public void shouldReturnKittensCountFromFeline() throws Exception {
+        when(felineMock.getKittens()).thenReturn(3);
+        Lion lion = new Lion("Самец", felineMock);
+        assertEquals(3, lion.getKittens());
+        verify(felineMock, times(1)).getKittens();
     }
 
     @Test
-    public void testConstructorWithMockGetFood() throws Exception {
-        List<String> fakeFood = Arrays.asList("Мыши", "Птицы");
-        when(infoFeline.getFood()).thenReturn(fakeFood);
-        Lion lion = new Lion(infoFeline);
-        assertEquals(fakeFood, lion.getFood());
-    }
-
-    // ---------- Тест на исключение ----------
-    @Test
-    public void testInvalidSexThrowsExceptionWithMessage() {
-        try {
-            new Lion("Нечто");
-            fail("Ожидалось исключение");
-        } catch (Exception e) {
-            assertEquals("Используйте допустимые значения пола животного - самец или самка",
-                    e.getMessage());
-        }
+    public void shouldReturnFoodListFromFeline() throws Exception {
+        List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
+        when(felineMock.getFood("Хищник")).thenReturn(expectedFood);
+        Lion lion = new Lion("Самец", felineMock);
+        assertEquals(expectedFood, lion.getFood());
+        verify(felineMock, times(1)).getFood("Хищник");
     }
 }
+

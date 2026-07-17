@@ -3,38 +3,30 @@
 import java.util.List;
 
 public class Lion {
-    private final FelineCharacteristics infoFeline;
+    private Feline feline;
+    boolean hasMane;
 
-    // Основной конструктор – внедрение зависимости (Dependency Injection)
-<span class="fc" id="L9">    public Lion(FelineCharacteristics infoFeline) {</span>
-<span class="fc" id="L10">        this.infoFeline = infoFeline;</span>
-<span class="fc" id="L11">    }</span>
-
-    // Конструктор  создаёт Feline и передаёт его в основной конструктор
-<span class="fc" id="L14">    public Lion(String sex) throws Exception {</span>
-        boolean hasMane;
-<span class="fc bfc" id="L16" title="All 2 branches covered.">        if (&quot;Самец&quot;.equals(sex)) {</span>
-<span class="fc" id="L17">            hasMane = true;</span>
-<span class="fc bfc" id="L18" title="All 2 branches covered.">        } else if (&quot;Самка&quot;.equals(sex)) {</span>
-<span class="fc" id="L19">            hasMane = false;</span>
+<span class="fc" id="L9">    public Lion(String sex,Feline feline) throws Exception {</span>
+<span class="fc bfc" id="L10" title="All 2 branches covered.">        if (&quot;Самец&quot;.equals(sex)) {</span>
+<span class="fc" id="L11">            hasMane = true;</span>
+<span class="fc bfc" id="L12" title="All 2 branches covered.">        } else if (&quot;Самка&quot;.equals(sex)) {</span>
+<span class="fc" id="L13">            hasMane = false;</span>
         } else {
-<span class="fc" id="L21">            throw new Exception(&quot;Используйте допустимые значения пола животного - самец или самка&quot;);</span>
+<span class="fc" id="L15">            throw new Exception(&quot;Используйте допустимые значения пола животного - самей или самка&quot;);</span>
         }
-        // Создаём конкретную реализацию Feline и внедряем её
-<span class="fc" id="L24">        this.infoFeline = new Feline(hasMane);</span>
-<span class="fc" id="L25">    }</span>
-
-    // Все методы делегируются внедрённому объекту
-    public boolean doesHaveMane() {
-<span class="fc" id="L29">        return infoFeline.doesHaveMane();</span>
-    }
+<span class="fc" id="L17">        this.feline = feline;</span>
+<span class="fc" id="L18">    }</span>
 
     public int getKittens() {
-<span class="fc" id="L33">        return infoFeline.getKittens();</span>
+<span class="fc" id="L21">        return feline.getKittens();</span>
+    }
+
+    public boolean doesHaveMane() {
+<span class="fc" id="L25">        return hasMane;</span>
     }
 
     public List&lt;String&gt; getFood() throws Exception {
-<span class="fc" id="L37">        return infoFeline.getFood();</span>
+<span class="fc" id="L29">        return feline.getFood(&quot;Хищник&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
